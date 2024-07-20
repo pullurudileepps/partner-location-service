@@ -17,6 +17,7 @@
 	<modules>
 		<module>order-pickup-location</module>
 		<module>partner-location</module>
+		<module>allocation-service</module>
 	</modules>
 	<url/>
 	<licenses>
