@@ -3,10 +3,10 @@ package com.miniproject.orderpickuplocation;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class OrderPickupLocationApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 

@@ -23,35 +23,34 @@ public class PartnerController {
         this.partnerService = partnerService;
     }
 
-    @PostMapping("createPartner/{id}")
+    @PostMapping("/{id}/createPartner")
     public ResponseEntity<?> CreatePartner(@PathVariable("id") long partnerId,
-                                           @RequestBody UpdatePartnerRequestDto requestDto)
-            throws InvalidLatitudeException, InvalidLongitudeException {
+                                           @RequestBody UpdatePartnerRequestDto requestDto) {
         try {
-            Double latitude = (Double) requestDto.getLocation().getLatitude();
-            Double longitude = (Double) requestDto.getLocation().getLongitude();
-            if (!validateLatitudeCheck(latitude)) {
-                throw new InvalidLatitudeException("Value should be between -90 to +90");
-            }
-            if (!validateLongitudeCheck(longitude)) {
-                throw new InvalidLongitudeException("Value should be between -180 to +180");
-            }
-            Partner result = this.partnerService.createPartner(partnerId, requestDto.getName(), latitude, longitude);
-            return new ResponseEntity<>(result, HttpStatus.CREATED);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            double latitude = requestDto.getLocation().getLatitude();
+            double longitude = requestDto.getLocation().getLongitude();
+            vaildateRequest(latitude, longitude);
+            Partner partner = this.partnerService.updatePartner(partnerId, requestDto.getName(), latitude, longitude);
+            return new ResponseEntity<>(partner, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    private boolean validateLatitudeCheck(Double latitude) {
-        if (latitude == null) return false;
-        return latitude >= -90 && latitude <= 90;
-    }
-
-    private boolean validateLongitudeCheck(Double longitude) {
-        if (longitude == null) return false;
-        return longitude >= -180 && longitude <= 180;
+    @PutMapping("/{id}/updatePartner")
+    public ResponseEntity<?> UpdatePartner(@PathVariable("id") long partnerId,
+                                           @RequestBody UpdatePartnerRequestDto requestDto) {
+        try {
+            double latitude = requestDto.getLocation().getLatitude();
+            double longitude = requestDto.getLocation().getLongitude();
+            vaildateRequest(latitude, longitude);
+            Partner partner = this.partnerService.updatePartner(partnerId, requestDto.getName(), latitude, longitude);
+            return new ResponseEntity<>(partner, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping({"/{id}"})
@@ -67,5 +66,24 @@ public class PartnerController {
     @GetMapping("/All")
     public List<?> getAllPartners() {
         return this.partnerService.getAllPartner();
+    }
+
+    public void vaildateRequest(double latitude, double longitude) throws InvalidLatitudeException, InvalidLongitudeException {
+        if (!validateLatitudeCheck(latitude)) {
+            throw new InvalidLatitudeException("Value should be between -90 to +90");
+        }
+        if (!validateLongitudeCheck(longitude)) {
+            throw new InvalidLongitudeException("Value should be between -180 to +180");
+        }
+    }
+
+    private boolean validateLatitudeCheck(Double latitude) {
+        if (latitude == null) return false;
+        return latitude >= -90 && latitude <= 90;
+    }
+
+    private boolean validateLongitudeCheck(Double longitude) {
+        if (longitude == null) return false;
+        return longitude >= -180 && longitude <= 180;
     }
 }

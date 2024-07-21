@@ -19,7 +19,7 @@ public class PartnerRespository {
         this.template = template;
     }
 
-    public Partner createPartner(Partner partner) {
+    public Partner updatePartner(Partner partner) {
         this.template.opsForHash().put(HASH_KEY, "partner_" + partner.getId(), partner);
         return partner;
     }

@@ -19,23 +19,26 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner createPartner(long partnerId, String name, double latitude, double longitude) {
+    public Partner updatePartner(long partnerId, String name, double latitude, double longitude) {
+        Partner partner;
         Optional<Partner> existingPartner = this.partnerRespository.findById(partnerId);
         if (existingPartner.isPresent()) {
-            Partner partner = existingPartner.get();
-            if (!partner.getName().equalsIgnoreCase(name)) {
-                throw new RuntimeException("Partner with id: " + partnerId + " already exists");
-            }
-            return partner;
+            partner = existingPartner.get();
+            partner.setName(name);
+            Location location = new Location();
+            location.setLatitude(latitude);
+            location.setLongitude(longitude);
+            partner.setLocation(location);
+        }else{
+            partner = new Partner();
+            partner.setId(partnerId);
+            partner.setName(name);
+            Location location = new Location();
+            location.setLatitude(latitude);
+            location.setLongitude(longitude);
+            partner.setLocation(location);
         }
-        Partner p = new Partner();
-        p.setId(partnerId);
-        p.setName(name);
-        Location location = new Location();
-        location.setLatitude(latitude);
-        location.setLongitude(longitude);
-        p.setLocation(location);
-        return this.partnerRespository.createPartner(p);
+        return this.partnerRespository.updatePartner(partner);
     }
 
     @Override
