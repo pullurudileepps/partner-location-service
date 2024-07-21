@@ -11,14 +11,14 @@
 	<groupId>com.miniproject</groupId>
 	<artifactId>partner-task-matching</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 	<name>partner-task-matching</name>
 	<description>partner-task-matching</description>
-	<modules>
-		<module>order-pickup-location</module>
-		<module>partner-location</module>
-		<module>allocation-service</module>
-	</modules>
+<!--	<modules>-->
+<!--		<module>order-pickup-location</module>-->
+<!--		<module>partner-location</module>-->
+<!--		<module>allocation-service</module>-->
+<!--	</modules>-->
 	<url/>
 	<licenses>
 		<license/>
