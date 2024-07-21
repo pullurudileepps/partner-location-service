@@ -11,30 +11,22 @@
 	<groupId>com.miniproject</groupId>
 	<artifactId>partner-task-matching</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+
+	<packaging>pom</packaging>
+
 	<name>partner-task-matching</name>
 	<description>partner-task-matching</description>
-<!--	<modules>-->
-<!--		<module>order-pickup-location</module>-->
-<!--		<module>partner-location</module>-->
-<!--		<module>allocation-service</module>-->
-<!--	</modules>-->
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+
+	<modules>
+		<module>order-pickup-location</module>
+		<module>partner-location</module>
+		<module>allocation</module>
+	</modules>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,7 +36,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
